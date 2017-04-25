@@ -1,0 +1,18 @@
+@startuml
+
+actor user
+participant "editor sidebar" as editor
+entity "application" as app
+database "data storage" as ds
+
+user -> editor : click "Clear Trash ..."
+editor -> user : confirm purge
+user -> editor : confirmed
+
+editor -> app : request purge items
+app -> ds : delete items
+ds -> ds : persist
+ds -> app : items deleted
+app -> editor : items purged
+
+@enduml

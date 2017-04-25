@@ -1,0 +1,22 @@
+@startuml
+
+actor user
+participant "editor sidebar" as editor
+entity "application" as app
+database "data storage" as ds
+
+user -> editor : click "New ..."
+editor -> editor : open "Item Editor" dialog
+
+user -> editor : save item
+editor -> app : request create item
+app -> ds : store item
+ds -> ds : generate item key
+ds -> ds : store item key
+ds -> ds : generate hashes
+ds -> ds : encrypt content
+ds -> ds : persist
+ds -> app : item stored
+app -> editor : item created
+
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+
+actor user
+participant "editor sidebar" as editor
+entity "application" as app
+database "data storage" as ds
+
+user -> editor : click "Trash it ..."
+editor -> user : confirm delete?
+user -> editor : confirmed
+
+editor -> app : request update item (disabled)
+app -> ds : store item
+ds -> ds : encrypt content
+ds -> ds : persist
+ds -> app : item stored
+app -> editor : item deleted
+
+@enduml

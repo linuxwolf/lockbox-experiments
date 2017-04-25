@@ -1,0 +1,25 @@
+@startuml
+
+actor user
+participant "editor sidebar" as editor
+entity "application" as app
+database "data storage" as ds
+
+user -> editor : click "Edit ..."
+editor -> editor : open "Item Editor" dialog
+
+user -> editor : save item
+editor -> app : request update item
+app -> app : generate patch - diff(new -> old)
+app -> ds : store item
+
+opt site / tags changed
+ds -> ds : re-generate hashes
+end
+
+ds -> ds : encrypt content
+ds -> ds : persist
+ds -> app : item stored
+app -> editor : item updated
+
+@enduml

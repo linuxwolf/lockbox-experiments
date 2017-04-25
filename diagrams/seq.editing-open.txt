@@ -1,0 +1,18 @@
+@startuml
+
+actor user
+entity browser
+participant "editor sidebar" as editor
+entity "application" as app
+database "data storage" as ds
+
+user -> browser : display lockbox
+browser -> app : open editor sidebar
+app -> editor : open
+editor -> app : load items
+app -> ds : retrieve items list
+ds -> app : items list
+app -> editor : items list
+editor -> editor : render list
+
+@enduml
