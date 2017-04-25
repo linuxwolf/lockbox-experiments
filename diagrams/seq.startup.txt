@@ -6,7 +6,8 @@ database "data storage" as ds
 
 browser -> app : loads
 app -> ds : open database
-app -> browser : install popup(s)
+app -> browser : install browser action
+app -> browser : install context menus
 app -> browser : install sidebar editor
 
 @enduml
